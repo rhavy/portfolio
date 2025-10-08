@@ -90,10 +90,10 @@ export default function CurriculoPage() {
                 <div className="flex items-center gap-2 text-sm text-slate-700">
                   <Mail size={16} />
                   <a
-                    href="mailto:rhavymoraes101@gmail.com"
-                    className="underline hover:text-blue-600"
+                  href="mailto:rhavymoraes101@gmail.com"
+                  className="underline hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
                   >
-                    rhavymoraes101@gmail.com
+                  rhavymoraes101@gmail.com
                   </a>
                 </div>
               </CardContent>
