@@ -33,7 +33,6 @@ interface Experience {
   link?: string | null;
 }
 
-
 // Mapeamento de ícones
 const iconMap: Record<string, React.ReactNode> = {
   Globe: <Globe size={16} />,
@@ -106,11 +105,9 @@ export default function CurriculoPage() {
   const [portugues, setPortugues] = React.useState<"pt-br" | "en" | "es">("pt-br");
 
   // Seleção de dados por idioma
-  const experiencesData =
-    portugues === "pt-br" ? experiencesPT : portugues === "en" ? experiencesEN : experiencesES;
+  const experiencesData = portugues === "pt-br" ? experiencesPT : portugues === "en" ? experiencesEN : experiencesES;
   const skillsData = portugues === "pt-br" ? skillsPT : portugues === "en" ? skillsEN : skillsES;
-  const competenciasData =
-    portugues === "pt-br" ? competenciasPT : portugues === "en" ? competenciasEN : competenciasES;
+  const competenciasData = portugues === "pt-br" ? competenciasPT : portugues === "en" ? competenciasEN : competenciasES;
   const contact = portugues === "pt-br" ? contactPT : portugues === "en" ? contactEN : contactES;
 
   // Mapear experiências com ícones
