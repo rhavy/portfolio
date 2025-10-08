@@ -1,0 +1,9 @@
+[
+  { "name": "Vule", "icon": "Code" },
+  { "name": "Next", "icon": "Code" },
+  { "name": "Angular", "icon": "Code" },
+  { "name": "React", "icon": "Code" },
+  { "name": "React Native", "icon": "Smartphone" },
+  { "name": "Node.js", "icon": "Code" },
+  { "name": "Flutter", "icon": "Smartphone" }
+]

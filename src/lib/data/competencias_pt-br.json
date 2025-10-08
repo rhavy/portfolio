@@ -1,0 +1,6 @@
+[
+  { "name": "Linguagens", "title": "Delphi, C/C++, C#, Dart, Java, Python" },
+  { "name": "Web/Mobile", "title": "HTML5, CSS, JS, TypeScript, React, React Native, Next, Angular, Vue, Flutter, Node.js" },
+  { "name": "Bancos", "title": "SQL, MySQL, MongoDB, Firebase" },
+  { "name": "Design", "title": "Figma, Adobe Muse, 3ds Max, Unreal Engine" }
+]

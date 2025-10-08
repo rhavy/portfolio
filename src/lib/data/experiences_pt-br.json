@@ -1,0 +1,42 @@
+[
+  {
+    "company": "Oficina do Mineiro",
+    "date": "Fev/2001",
+    "description": "Desenvolvimento de site institucional em HTML",
+    "icon": "Globe",
+    "repository": null,
+    "link": null
+  },
+  {
+    "company": "Point Açaí",
+    "date": "Abr/2021",
+    "description": "Aplicativo de loja desenvolvido em Flutter",
+    "icon": "Smartphone",
+    "repository": null,
+    "link": null
+  },
+  {
+    "company": "IMFAV – Igreja",
+    "date": "Jun/2021",
+    "description": "Site institucional em WordPress; reformulado em React/Angular; app em React Native",
+    "icon": "Home",
+    "repository": "IMFAV",
+    "link": "https://github.com/rhavy/IMFAV.git"
+  },
+  {
+    "company": "Severino Remodelações",
+    "date": "Out/2025",
+    "description": "Projeto de site para empresa de reformas",
+    "icon": "PhoneForwarded",
+    "repository": "Severino Remodelações",
+    "link": "https://github.com/rhavy/severino_remodelacoes.git"
+  },
+  {
+    "company": "Telefonia",
+    "date": "Ago/2025",
+    "description": "Sistema voltado para gestão de serviços de telefonia",
+    "icon": "Phone",
+    "repository": "Telefonia",
+    "link": "https://github.com/rhavy/Telefonia.git"
+  }
+]
