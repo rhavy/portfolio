@@ -3,21 +3,34 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Phone, MapPin, DownloadCloud, Globe, Smartphone, Code, Home, PhoneForwarded, } from "lucide-react";
+import { Mail, Phone, MapPin, DownloadCloud, Globe, Smartphone, Code, Home, PhoneForwarded } from "lucide-react";
 import { CompetenciasComponente } from "@/components/competencias";
 import { ExperienciaComponent } from "@/components/experiencias";
 import { FooterRepositorios, FooterTemplate } from "@/components/template/Footer/footer";
+import ReactCountryFlag from "react-country-flag";
 
 // JSON por idioma
 import experiencesPT from "../lib/data/experiences_pt-br.json";
 import experiencesEN from "../lib/data/experiences_en.json";
+import experiencesES from "../lib/data/experiences_es.json";
 import skillsPT from "../lib/data/skills_pt-br.json";
 import skillsEN from "../lib/data/skills_en.json";
+import skillsES from "../lib/data/skills_es.json";
 import competenciasPT from "../lib/data/competencias_pt-br.json";
 import competenciasEN from "../lib/data/competencias_en.json";
+import competenciasES from "../lib/data/competencias_es.json";
 import contactPT from "../lib/data/contact_pt-br.json";
 import contactEN from "../lib/data/contact_en.json";
-import ReactCountryFlag from "react-country-flag";
+import contactES from "../lib/data/contact_es.json";
+
+type Experience = {
+  company: string;
+  date: string;
+  description: string;
+  icon?: React.ReactNode; // Corrigido para ReactNode
+  repository?: string;
+  link?: string;
+};
 
 
 // Mapear ícones
@@ -30,13 +43,12 @@ const iconMap: Record<string, React.ReactNode> = {
   Phone: <Phone size={16} />
 };
 
-
 // Textos da página
 const texts = {
   "pt-br": {
     idade: "37 anos",
     contato: "Contato",
-    descricaoContato: "Informações rápidas", // <- adicionada
+    descricaoContato: "Informações rápidas",
     formacao: "Formação",
     competencias: "Competências",
     resumo: "Resumo Profissional",
@@ -49,10 +61,10 @@ const texts = {
     ensinoSuperior: "Ensino Superior (em andamento) — Início: Abr/2021 • Previsão: Abr/2026",
     email: "rhavymoraes101@gmail.com"
   },
-  en: {
+  "en": {
     idade: "37 years",
     contato: "Contact",
-    descricaoContato: "Quick info", // <- adicionada
+    descricaoContato: "Quick info",
     formacao: "Education",
     competencias: "Skills",
     resumo: "Professional Summary",
@@ -64,21 +76,38 @@ const texts = {
     ensinoMedio: "High School Diploma — 2005",
     ensinoSuperior: "Higher Education (ongoing) — Start: Apr/2021 • Expected: Apr/2026",
     email: "rhavymoraes101@gmail.com"
+  },
+  "es": {
+    idade: "37 años",
+    contato: "Contacto",
+    descricaoContato: "Información rápida",
+    formacao: "Educación",
+    competencias: "Habilidades",
+    resumo: "Resumen Profesional",
+    experiencias: "Experiencia",
+    baixarPdf: "Descargar PDF",
+    descricaoCargo: "Desarrollador Web & Mobile — Vule / Angular / Next / React / React Native / Flutter / Node.js / Wordpress",
+    resumoDescricao: "Desarrollador freelance con experiencia en sitios institucionales, apps y soluciones web.",
+    resumoDetalhe: "Profesional con sólida experiencia práctica en desarrollo full-stack, orientado a la entrega de proyectos para pequeñas y medianas empresas, iglesias y tiendas locales. Hábil en migración y modernización de sitios, desarrollo de aplicaciones móviles e integración con APIs.",
+    ensinoMedio: "Bachillerato — 2005",
+    ensinoSuperior: "Educación Superior (en curso) — Inicio: Abr/2021 • Fin previsto: Abr/2026",
+    email: "rhavymoraes101@gmail.com"
   }
 };
 
-
 export default function CurriculoPage() {
-  const [portugues, setPortugues] = React.useState<"pt-br" | "en">("pt-br");
+  const [portugues, setPortugues] = React.useState<"pt-br" | "en" | "es">("pt-br");
 
   // Seleção de dados por idioma
-  const experiencesData = portugues === "pt-br" ? experiencesPT : experiencesEN;
-  const skillsData = portugues === "pt-br" ? skillsPT : skillsEN;
-  const competenciasData = portugues === "pt-br" ? competenciasPT : competenciasEN;
-  const contact = portugues === "pt-br" ? contactPT : contactEN;
+  const experiencesData = portugues === "pt-br" ? experiencesPT : portugues === "en" ? experiencesEN : experiencesES;
+  const skillsData = portugues === "pt-br" ? skillsPT : portugues === "en" ? skillsEN : skillsES;
+  const competenciasData = portugues === "pt-br" ? competenciasPT : portugues === "en" ? competenciasEN : competenciasES;
+  const contact = portugues === "pt-br" ? contactPT : portugues === "en" ? contactEN : contactES;
 
   // Mapear ícones
-  const experiences = experiencesData.map(exp => ({ ...exp, icon: iconMap[exp.icon] || null }));
+  const  experiences: Experience[] = experiencesData.map(exp => ({ ...exp, icon: iconMap[exp.icon] || null }));
+
+
   const skills = skillsData.map(skill => ({ ...skill, icon: iconMap[skill.icon] || null }));
   const competencias = competenciasData;
 
@@ -109,21 +138,18 @@ export default function CurriculoPage() {
           <div className="flex items-center gap-3 mt-3 sm:mt-0">
             {/* Seletor de idioma */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => setPortugues("pt-br")}
-                className={`p-1 rounded-md transition-transform duration-200 hover:scale-105 ${portugues === "pt-br" ? "ring-2 ring-blue-500" : ""}`}
-              >
+              <button onClick={() => setPortugues("pt-br")} className={`p-1 rounded-md ${portugues === "pt-br" ? "ring-2 ring-blue-500" : ""}`}>
                 <ReactCountryFlag countryCode="BR" svg style={{ width: '24px', height: '24px' }} title="Português" />
               </button>
-              <button
-                onClick={() => setPortugues("en")}
-                className={`p-1 rounded-md transition-transform duration-200 hover:scale-105 ${portugues === "en" ? "ring-2 ring-blue-500" : ""}`}
-              >
+              <button onClick={() => setPortugues("en")} className={`p-1 rounded-md ${portugues === "en" ? "ring-2 ring-blue-500" : ""}`}>
                 <ReactCountryFlag countryCode="US" svg style={{ width: '24px', height: '24px' }} title="English" />
+              </button>
+              <button onClick={() => setPortugues("es")} className={`p-1 rounded-md ${portugues === "es" ? "ring-2 ring-blue-500" : ""}`}>
+                <ReactCountryFlag countryCode="ES" svg style={{ width: '24px', height: '24px' }} title="Español" />
               </button>
             </div>
             {/* Botão de download PDF */}
-            <a href={portugues === "pt-br" ? "/pdf/rhavy_moraes_pt-br.pdf" : "/pdf/rhavy_moraes_en.pdf"} download>
+            <a href={portugues === "pt-br" ? "/pdf/rhavy_moraes_pt-br.pdf" : portugues === "en" ? "/pdf/rhavy_moraes_en.pdf" : "/pdf/rhavy_moraes_es.pdf"} download>
               <Button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white transition duration-200">
                 <DownloadCloud size={16} /> {texts[portugues].baixarPdf}
               </Button>
@@ -157,7 +183,6 @@ export default function CurriculoPage() {
                   </a>
                 </div>
               </CardContent>
-
             </Card>
 
             {/* Formação */}
@@ -195,9 +220,9 @@ export default function CurriculoPage() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-800">{texts[portugues].experiencias}</h3>
               <div className="grid gap-3">
-                                {experiences.map((exp, idx) => (
+                {experiences.map((exp) => (
                   <ExperienciaComponent
-                    key={idx}
+                    key={exp.company + exp.date}
                     date={exp.date}
                     company={exp.company}
                     description={exp.description}
@@ -210,14 +235,13 @@ export default function CurriculoPage() {
             </div>
 
             {/* Repositórios */}
-            <FooterRepositorios/>
+            <FooterRepositorios language={portugues} />
           </section>
         </article>
 
         {/* Footer */}
-        <FooterTemplate/>
+        <FooterTemplate language={portugues} />
       </section>
     </main>
   );
 }
-
