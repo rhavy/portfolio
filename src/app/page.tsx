@@ -8,6 +8,9 @@ import { Badge } from "@/components/ui/badge";
 
 // lucide icons
 import { Mail, Phone, MapPin, DownloadCloud, Globe, Smartphone, Code, Home, PhoneForwarded } from "lucide-react";
+import { CompetenciasComponente } from "@/components/competencias";
+import { ExperienciaComponent } from "@/components/experiencias";
+import { FooterRepositorios, FooterTemplate } from "@/components/template/Footer/footer";
 
 type Experience = {
   company?: string;
@@ -15,21 +18,34 @@ type Experience = {
   description: string;
   repository?: string; // Adicionando um campo para repositório
   icon?: React.ReactNode; // Adicionando um campo para ícone
+  link?: string; // Adicionando um campo para link
 };
 
 const experiences: Experience[] = [
   { company: "Oficina do Mineiro", date: "Fev/2001", description: "Desenvolvimento de site institucional em HTML", icon: <Globe size={16} /> },
   { company: "Point Açaí", date: "Abr/2021", description: "Aplicativo de loja desenvolvido em Flutter", icon: <Smartphone size={16} /> },
-  { company: "IMFAV – Igreja", date: "Jun/2021", description: "Site institucional em WordPress; reformulado em React/Angular; app em React Native", repository: "IMFAV", icon: <Home size={16} /> },
-  { company: "Severino Remodelações", date: "", description: "Projeto de site para empresa de reformas", repository: "Severino Remodelações", icon: <PhoneForwarded size={16} /> },
-  { company: "Telefonia", date: "", description: "Sistema voltado para gestão de serviços de telefonia", repository: "Telefonia", icon: <Phone size={16} /> },
+  { company: "IMFAV – Igreja", date: "Jun/2021", description: "Site institucional em WordPress; reformulado em React/Angular; app em React Native", 
+    repository: "IMFAV", icon: <Home size={16} />, link: "https://github.com/rhavy/IMFAV.git"},
+  { company: "Severino Remodelações", date: "Out/2025", description: "Projeto de site para empresa de reformas", 
+    repository: "Severino Remodelações", icon: <PhoneForwarded size={16} />, link: "https://github.com/rhavy/severino_remodelacoes.git" },
+  { company: "Telefonia", date: "Ago/2025", description: "Sistema voltado para gestão de serviços de telefonia", 
+    repository: "Telefonia", icon: <Phone size={16} />, link: "https://github.com/rhavy/Telefonia.git" },
 ];
 
 const skills = [
+  { name: "Vule", icon: <Code size={16} /> },
+  { name: "Next", icon: <Code size={16} /> },
+  { name: "Angular", icon: <Code size={16} /> },
   { name: "React", icon: <Code size={16} /> },
   { name: "React Native", icon: <Smartphone size={16} /> },
   { name: "Node.js", icon: <Code size={16} /> },
   { name: "Flutter", icon: <Smartphone size={16} /> },
+];
+const competencias = [
+  { name: "Linguagens", title: "Delphi, C/C++, C#, Dart, Java, Python" },
+  { name: "Web/Mobile", title: "HTML5, CSS, JS, TypeScript, React, React Native, Next, Angular, Vue, Flutter, Node.js" },
+  { name: "Bancos", title: "SQL, MySQL, MongoDB, Firebase" },
+  { name: "Design", title: "Figma, Adobe Muse, 3ds Max, Unreal Engine" },
 ];
 
 export default function CurriculoPage() {
@@ -126,10 +142,10 @@ export default function CurriculoPage() {
               </CardHeader>
               <CardContent className="text-sm text-gray-700">
                 <ul className="list-disc pl-4 space-y-1">
-                  <li><strong>Linguagens:</strong> Delphi, Python, C/C++, C#, Java, Dart</li>
-                  <li><strong>Web/Mobile:</strong> HTML5, CSS, JS, React, React Native, Angular, Vue, Flutter, Node.js</li>
-                  <li><strong>Bancos:</strong> SQL, MySQL, MongoDB, Firebase</li>
-                  <li><strong>Design:</strong> Adobe Muse, 3ds Max, Unreal Engine</li>
+                  {competencias.map((compet) => (
+                    <CompetenciasComponente key={compet.name} name={compet.name} title={compet.title}/>
+                    )
+                  )}
                 </ul>
               </CardContent>
             </Card>
@@ -153,39 +169,18 @@ export default function CurriculoPage() {
               <h3 className="text-lg font-semibold text-gray-800">Experiências</h3>
               <div className="grid gap-3">
                 {experiences.map((exp, idx) => (
-                  <article
-                    key={idx}
-                    className="p-4 rounded-xl border border-gray-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-105"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        {exp.icon}
-                        <h4 className="text-sm font-semibold text-gray-900">{exp.company || "Projeto"}</h4>
-                      </div>
-                      <time className="text-xs text-gray-500">{exp.date}</time>
-                    </div>
-                    <p className="mt-2 text-sm text-gray-700">{exp.description}</p>
-                    {exp.repository && (
-                      <p className="mt-2 text-xs text-blue-600">
-                        Repositório: <span className="font-medium">{exp.repository}</span>
-                      </p>
-                    )}
-                  </article>
+                  <ExperienciaComponent key={idx} date={exp.date} company={exp.company} description={exp.description} icon={exp.icon} repository={exp.repository} link={exp.link}/>
                 ))}
               </div>
             </div>
 
             {/* Repositórios */}
-            <footer className="mt-4 text-sm text-gray-600">
-              <p>Repositórios: <span className="font-medium">IMFAV</span>, <span className="font-medium">Severino Remodelações</span>, <span className="font-medium">Telefonia</span></p>
-            </footer>
+            <FooterRepositorios/>
           </section>
         </article>
 
         {/* Footer */}
-        <div className="mt-12 text-center text-xs text-gray-500">
-          Design moderno e limpo • Animações via tw-animate-css • Componentes UI via shadcn/ui
-        </div>
+        <FooterTemplate/>
       </section>
     </main>
   );
